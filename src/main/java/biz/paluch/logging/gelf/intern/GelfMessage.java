@@ -102,15 +102,7 @@ public class GelfMessage {
 
         for (Map.Entry<String, String> additionalField : additonalFields.entrySet()) {
             if (!ID_NAME.equals(additionalField.getKey()) && additionalField.getValue() != null) {
-                // try adding the value as a double
-                Object value;
-                try {
-                    value = Double.parseDouble(additionalField.getValue());
-                } catch (NumberFormatException ex) {
-                    // fallback on the string value
-                    value = additionalField.getValue();
-                }
-                map.put(additionalFieldPrefix + additionalField.getKey(), value);
+                map.put(additionalFieldPrefix + additionalField.getKey(), additionalField.getValue());
             }
         }
 
@@ -273,7 +265,7 @@ public class GelfMessage {
 
     /**
      * Add multiple fields (key/value pairs)
-     * 
+     *
      * @param fields
      * @return the current GelfMessage.
      */
@@ -288,7 +280,7 @@ public class GelfMessage {
 
     /**
      * Add a particular field.
-     * 
+     *
      * @param key
      * @param value
      * @return the current GelfMessage.
